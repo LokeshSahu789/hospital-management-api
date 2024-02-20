@@ -35,7 +35,7 @@ public class Address {
 	private String street;
 	
 	@NotBlank(message = "neighbourhood cannot be blank")
-	@Column(name = "neighbourhood")
+	@Column(name = "neighborhood")
 	private String neighbourhood;
 	
 	@NotBlank(message = "zipcode cannot be blank")
