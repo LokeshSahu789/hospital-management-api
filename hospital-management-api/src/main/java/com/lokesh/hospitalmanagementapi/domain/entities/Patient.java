@@ -1,45 +1,40 @@
 package com.lokesh.hospitalmanagementapi.domain.entities;
 
-import com.lokesh.hospitalmanagementapi.domain.dtos.doctor.DoctorDTO;
-import com.lokesh.hospitalmanagementapi.domain.enums.Specialty;
-
+import com.lokesh.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
-@Table(name="doctors")
-@Entity(name="Doctor")
-public class Doctor {
+@Table(name="patients")
+@Entity(name="Patient")
+public class Patient {
 	
 	/**
 	 * @param id
 	 * @param name
 	 * @param email
-	 * @param crm
+	 * @param cpf
 	 * @param telephone
-	 * @param specialty
 	 * @param active
 	 * @param address
 	 */
-	public Doctor(DoctorDTO doctorDTO) {
-		this.name = doctorDTO.name();
-		this.email = doctorDTO.email();
-		this.crm = doctorDTO.crm();
-		this.telephone = doctorDTO.telephone();
-		this.specialty = doctorDTO.specialty();
+	public Patient(PatientDTO patientDTO) {
+		this.name = patientDTO.name();
+		this.email = patientDTO.email();
+		this.cpf = patientDTO.cpf();
+		this.telephone = patientDTO.telephone();
 		this.active = true;
-		this.address = new Address(doctorDTO.address());
+		this.address = new Address(patientDTO.address());
 	}
 
-	public Doctor() {}
+	public Patient() {}
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -52,20 +47,17 @@ public class Doctor {
 	@Column(name = "email")
 	private String email;
 	
-	@NotBlank(message = "crm cannot be blank")
-	@Column(name = "crm", length = 6)
-	private String crm;
+	@NotBlank(message = "cpf cannot be blank")
+	@Pattern(regexp = "\\d{11}", message = "invalid format for cpf")
+	@Column(name = "cpf", length = 11)
+	private String cpf;
 	
 	@NotBlank(message = "telephone cannot be blank")
 	@Column(name = "telephone")
 	private String telephone;
 	
-	@NotNull(message = "specialty cannot be null")
-	@Enumerated(EnumType.STRING)
-	private Specialty specialty;
-	
 	@NotNull(message = "active cannot be blank")
-	@Column(name = "active")
+	@Column(name = "_active")
 	private Boolean active;
 	
 	@NotNull(message = "address cannot be blank")
@@ -115,17 +107,17 @@ public class Doctor {
 	}
 
 	/**
-	 * @return the crm
+	 * @return the cpf
 	 */
-	public String getCrm() {
-		return crm;
+	public String getCpf() {
+		return cpf;
 	}
 
 	/**
-	 * @param crm the crm to set
+	 * @param cpf the cpf to set
 	 */
-	public void setCrm(String crm) {
-		this.crm = crm;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	/**
@@ -140,20 +132,6 @@ public class Doctor {
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-
-	/**
-	 * @return the specialty
-	 */
-	public Specialty getSpecialty() {
-		return specialty;
-	}
-
-	/**
-	 * @param specialty the specialty to set
-	 */
-	public void setSpecialty(Specialty specialty) {
-		this.specialty = specialty;
 	}
 
 	/**
@@ -183,8 +161,7 @@ public class Doctor {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	
+
 	
 	
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lokesh.hospitalmanagementapi.application.usecase.doctor.FindDoctorByIdUseCase;
 import com.lokesh.hospitalmanagementapi.application.usecase.doctor.FindDoctorsUseCase;
@@ -39,6 +40,7 @@ public class DoctorServiceImpl implements DoctorService {
 	@Autowired
 	private FindDoctorByIdUseCase findDoctorById;
 	
+	@Transactional
 	@Override
 	public Doctor addDoctor(DoctorDTO doctorDTO) {
 		
@@ -75,7 +77,7 @@ public class DoctorServiceImpl implements DoctorService {
 		}
 		
 		if (doctorUpdatedDataDTO.telephone() != null) {
-			doctor.setName(doctorUpdatedDataDTO.telephone());
+			doctor.setTelephone(doctorUpdatedDataDTO.telephone());
 		}
 		
 		if (doctorUpdatedDataDTO.address() != null) {

@@ -33,7 +33,7 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	
-	@PostMapping
+	@PostMapping("/")
 	public ResponseEntity<Object> postDoctor(@RequestBody @Valid DoctorDTO doctorDTO){
 		
 		Doctor doctor = doctorService.addDoctor(doctorDTO);
@@ -54,7 +54,7 @@ public class DoctorController {
 		
 	}
 	
-	@GetMapping
+	@GetMapping("/")
 	public ResponseEntity<Object> getDoctors(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
 		Page<DoctorPublicDataDTO> doctors = doctorService.findDoctors(pageable);
 		
@@ -62,7 +62,7 @@ public class DoctorController {
 		
 	}
 	
-	@PutMapping
+	@PutMapping("/")
 	public ResponseEntity<Object> putDoctor(@RequestBody @Valid DoctorUpdatedDataDTO doctorUpdatedDataDTO){
 		Doctor doctor = doctorService.updateDoctor(doctorUpdatedDataDTO);
 		
