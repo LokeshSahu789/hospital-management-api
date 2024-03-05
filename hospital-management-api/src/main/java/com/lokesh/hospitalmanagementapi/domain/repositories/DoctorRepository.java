@@ -25,18 +25,18 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 	 * @param consultationDate Date to check if the doctor is free
 	 * @return A random free doctor with the defined specialty if successful, or null if it is non-existent
 	 */
-//	@Query("""
-//			select d from Doctor d
-//			where d.active = true 
-//			and specialty = :specialty
-//			and d.id not in (
-//				select c.doctor.id from Consultation c
-//				where c.consultationDate = :consultationDate 
-//				and c.canceled = false
-//			)
-//			order by rand()
-//			limit 1
-//			""")
-//	Doctor findOneFreeDoctorBySpecialty(Specialty specialty, LocalDateTime consultationDate);
+	@Query("""
+			select d from Doctor d
+			where d.active = true 
+			and specialty = :specialty
+			and d.id not in (
+				select c.doctor.id from Consultation c
+				where c.consultationDate = :consultationDate 
+				and c.canceled = false
+			)
+			order by rand()
+			limit 1
+			""")
+	Doctor findOneFreeDoctorBySpecialty(Specialty specialty, LocalDateTime consultationDate);
 	
 }

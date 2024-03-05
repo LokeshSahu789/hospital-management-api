@@ -32,8 +32,8 @@ public class FindOneFreeDoctorBySpecialtyUseCase {
 	 *
 	 */
 	
-//	public Doctor execute(Specialty specialty, LocalDateTime localDateTime) {
-//		return doctorRepository.findOneFreeDoctorBySpecialty(specialty, localDateTime);
-//	}
+	public Doctor execute(Specialty specialty, LocalDateTime localDateTime) {
+		return doctorRepository.findOneFreeDoctorBySpecialty(specialty, localDateTime);
+	}
 	
 }
